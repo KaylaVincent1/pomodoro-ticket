@@ -1,5 +1,6 @@
 import  time
 from tkinter import *
+from tkinter.messagebox import showinfo
 
 #Create an instance of Tkinter frame
 root = Tk()
@@ -8,9 +9,7 @@ root.title("Pomodoro Timer")
 #Set the geometry of the Tkinter frame
 root.geometry("700x400")
 
-timer = "25:00"
-
-label = Label(root, text=f"""{timer}""", font=("Arial", 50))
+label = Label(root, text="25:00", font=("Arial", 50))
 label.config(fg="green")
 label.pack(pady=20)
 
@@ -24,6 +23,8 @@ def countdown(time):
         timer = '{:02d}:{:02d}'.format(mins, secs)
         label.config(text=timer)
         root.after(1000, countdown, time - 1)
+        if timer == "00:00":
+            showinfo("Break Time!", "You can take a break!")
 
 def pause_timer():
     label.config(text="Timer Paused")
