@@ -16,10 +16,14 @@ label.pack(pady=20)
 
 # Functions for each button
 def start_timer():
-    label.config(text="Timer Started")
+    countdown(25 * 60)  # 25 minutes in seconds
 
-
-
+def countdown(time):
+    if time >= 0:
+        mins, secs = divmod(time, 60)
+        timer = '{:02d}:{:02d}'.format(mins, secs)
+        label.config(text=timer)
+        root.after(1000, countdown, time - 1)
 
 def pause_timer():
     label.config(text="Timer Paused")
